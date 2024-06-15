@@ -1,3 +1,4 @@
+import 'package:expenz/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,14 +15,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "Inter",
-      ),
-      home: Scaffold(
-        body: Center(
-          child: Text("Hello Flutter", style: TextStyle(
-            fontSize: 20,
-          ),),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.transparent, // Change to desired color
+          elevation: 0, // Optional: remove shadow
+          iconTheme: IconThemeData(
+            color: Colors.black, // Change to desired icon color
+          ),
         ),
       ),
+      home: OnboardingScreen(),
     );
   }
 }
