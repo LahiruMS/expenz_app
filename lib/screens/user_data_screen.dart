@@ -1,5 +1,7 @@
 import 'package:expenz/contains/color.dart';
 import 'package:expenz/contains/constants.dart';
+import 'package:expenz/screens/main_screen.dart';
+import 'package:expenz/screens/onboarding/user_services.dart';
 import 'package:expenz/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
@@ -176,13 +178,29 @@ class _UserDataScreenState extends State<UserDataScreen> {
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
                           // Form is valid, process data
-                          String username = _usernameController.text;
+                          String userName = _usernameController.text;
                           String email = _emailController.text;
                           String password = _passwordContorller.text;
                           String confirmPassword =
                               _confirmPasswordContorller.text;
 
-                          print("$username $email $password $confirmPassword");
+                          //save the User name andemail in the device storage
+                          await UserServices.storeUserDetails(
+                              userName: userName,
+                              email: email,
+                              password: password,
+                              confirmPassword: confirmPassword,
+                              context: context);
+
+                          //navigate to the main screen
+                          if(context.mounted) {
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return MainScreen();
+                            }),
+                          );
+                          }
                         }
                       },
                       child: CustomButton(
